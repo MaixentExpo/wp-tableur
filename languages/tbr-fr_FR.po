@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-tableur\n"
+"POT-Creation-Date: 2019-03-15 16:52+0100\n"
+"PO-Revision-Date: 2019-03-15 16:52+0100\n"
+"Last-Translator: Philippe Billerot <pbillerot@yahoo.com>\n"
+"Language-Team: pbillerot\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: plugin.php\n"
+"X-Poedit-SearchPath-1: tableur.php\n"
+"X-Poedit-SearchPath-2: tableur-element.php\n"
+"X-Poedit-SearchPath-3: tableur-form.php\n"
+"X-Poedit-SearchPath-4: tableur-view.php\n"
+"X-Poedit-SearchPath-5: tableur-widget.php\n"
+"X-Poedit-SearchPath-6: helper.php\n"
+
+#: helper.php:63 helper.php:182
+msgid "End brace not found"
+msgstr "Fermeture parenthèse non trouvée"
+
+#: helper.php:121
+msgid "Element not found"
+msgstr "Élément non trouvé"
+
+#: helper.php:421
+msgid "Macro not found"
+msgstr "Macro non trouvée"
+
+#: plugin.php:183 plugin.php:243
+msgid "New"
+msgstr "Ajouter"
+
+#: plugin.php:187 tableur-view.php:70
+msgid "Edit"
+msgstr "Editer"
+
+#: plugin.php:198 tableur-view.php:344 tableur-view.php:356
+msgid "About"
+msgstr "À Propos"
+
+#: plugin.php:235
+msgid "Delete OK"
+msgstr "Suppression réalisée avec succès"
+
+#: plugin.php:256
+msgid "Search"
+msgstr "Rechercher"
+
+#: plugin.php:414 plugin.php:415 plugin.php:426 plugin.php:430 plugin.php:434
+msgid "JSON_ERROR_DEPTH"
+msgstr "JSON_ERROR_DEPTH"
+
+#: plugin.php:418 plugin.php:419
+msgid "JSON_ERROR_STATE_MISMATCH"
+msgstr "JSON_ERROR_STATE_MISMATCH"
+
+#: plugin.php:422 plugin.php:423
+msgid "JSON_ERROR_CTRL_CHAR"
+msgstr "JSON_ERROR_CTRL_CHAR"
+
+#: plugin.php:427
+msgid "JSON_ERROR_SYNTAX"
+msgstr "JSON_ERROR_SYNTAX"
+
+#: plugin.php:431
+msgid "JSON_ERROR_UTF8"
+msgstr "JSON_ERROR_UTF8"
+
+#: plugin.php:435
+msgid "JSON_ERROR_UNKNOW"
+msgstr "JSON_ERROR_UNKNOW"
+
+#: tableur-element.php:201
+msgid "!!! No label"
+msgstr "!!! Sans label"
+
+#: tableur-form.php:80
+msgid "Item was successfully saved"
+msgstr "Élément enregistré avec succès"
+
+#: tableur-form.php:82
+msgid "There was an error while saving item"
+msgstr "Des erreurs durant l'enregistrement"
+
+#: tableur-form.php:96
+msgid "Item was successfully updated"
+msgstr "Élément mis à jour avec succès"
+
+#: tableur-form.php:98 tableur.php:287
+msgid "There was an error while updating item"
+msgstr "Des erreurs durant la mise à jour"
+
+#: tableur-form.php:117
+msgid "Item not found"
+msgstr "Élément non trouvé"
+
+#: tableur-form.php:147
+msgid "Back to list"
+msgstr "Retour à la liste"
+
+#: tableur-form.php:175
+msgid "Save"
+msgstr "Enregistrer"
+
+#: tableur-form.php:215
+msgid "Name is required"
+msgstr "Nom est obligatoire"
+
+#: tableur-view.php:78 tableur-view.php:194
+msgid "Delete"
+msgstr "Supprimer"
+
+#: tableur-view.php:178
+msgid "All"
+msgstr "Tous"
+
+#: tableur-widget.php:557 tableur-widget.php:609 tableur-widget.php:619
+msgid "Message not sended"
+msgstr "Message non envoyé"
+
+#: tableur-widget.php:606 tableur-widget.php:616
+msgid "Message sended"
+msgstr "Message envoyé"
+
+#: tableur.php:38
+msgid "Json error"
+msgstr "Json error"

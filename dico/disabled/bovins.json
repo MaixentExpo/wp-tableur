@@ -1,0 +1,335 @@
+{
+    "application_title": "Bovins",
+    "application_description": "Gestion du Concours des Bovins",
+    "db_version": "1.1.0",
+    "tables": {
+        "fex_bovins": {
+            "schema": "CREATE TABLE IF NOT EXISTS fex_bovins ( id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR (50) NOT NULL, eleveur_id INT(11) NULL, pseudo VARCHAR (50) NULL, actif VARCHAR(1) NULL, notes VARCHAR (250) NULL, cotisation DECIMAL (9,2) NULL, acquitte VARCHAR(1) NULL, recompense VARCHAR (3) NULL, categorie INT(11) NULL, PRIMARY KEY (id), UNIQUE KEY (name) );",
+            "db_update": [
+            ],
+            "singular": "Bovin",
+            "plural": "Bovins",
+            "elements": {
+                "name": {
+                    "label_column": "Ident.",
+                    "label_field": "Numéro d'Identification National",
+                    "type": "text",
+                    "placeholder": "",
+                    "required": true,
+                    "sortable": true,
+                    "editable": false
+                },
+                "eleveur_id": {
+                    "label_column": "Eleveur",
+                    "label_field": "Eleveur",
+                    "type": "foreign_key",
+                    "table": "fex_eleveurs",
+                    "column": "bovin_ids",
+                    "sortable": true
+                },
+                "pseudo": {
+                    "label_column": "Nom",
+                    "label_field": "Nom",
+                    "type": "text",
+                    "required": false,
+                    "editable": true
+                },
+                "actif": {
+                    "label_column": "Actif",
+                    "label_field": "Actif",
+                    "type": "checkbox",
+                    "sortable": true,
+                    "refresh": true,
+                    "editable": true
+                },
+                "cotisation": {
+                    "label_column": "Cotisation",
+                    "label_field": "Cotisation",
+                    "type": "decimal",
+                    "pattern": "^\\d+\\.\\d{2}$",
+                    "editable": true
+                },
+                "acquitte": {
+                    "label_column": "Acquittée",
+                    "label_field": "Cotisation acquittée",
+                    "type": "checkbox",
+                    "editable": true
+                },
+                "categorie": {
+                    "label_column": "Catégorie",
+                    "label_field": "Catégorie",
+                    "type": "foreign_key",
+                    "table": "fex_bovin_categories",
+                    "column": "bovin_ids",
+                    "sortable": true
+                },
+                "recompense": {
+                    "label_column": "Récompense",
+                    "label_field": "Récompense",
+                    "type": "select",
+                    "default": "9",
+                    "sortable": true,
+                    "refresh": false,
+                    "table": "fex_bovin_recompenses",
+                    "column": "bovin_ids",
+                    "editable": true,
+                    "items": {
+                        "9": "sans",
+                        "1": "1er prix",
+                        "2": "2ème prix",
+                        "3": "3ème prix",
+                        "4": "Grand Prix d'Excellence",
+                        "5": "Prix d'Excellence",
+                        "6": "Grand Honneur",
+                        "7": "Honneur"
+                    }
+                },
+                "notes": {
+                    "label_column": "Notes",
+                    "label_field": "Notes",
+                    "type": "textarea"
+                }
+            },
+            "views": {
+                "vall": {
+                    "title": "Bovins",
+                    "form_new": "fedit",
+                    "form_edit": "fedit",
+                    "deletable": true,
+                    "xorderby": "eleveur_id, name",
+                    "elements": {
+                        "name": {},
+                        "categorie": {},
+                        "eleveur_id": {},
+                        "recompense": {},
+                        "cotisation": {}
+                    }
+                }
+            },
+            "forms": {
+                "fedit": {
+                    "title": "Fiche Bovin",
+                    "elements": {
+                        "name": {},
+                        "pseudo": {},
+                        "categorie": {},
+                        "recompense": {},
+                        "eleveur_id": {},
+                        "actif": {},
+                        "cotisation": {},
+                        "acquitte": {},
+                        "notes": {}
+                    }
+                }
+            }
+        },
+        "fex_eleveurs": {
+            "schema": "CREATE TABLE IF NOT EXISTS fex_eleveurs ( id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR (50) NOT NULL, cheptel_ref VARCHAR (50) NULL, email VARCHAR (100) NULL, tel VARCHAR (100) NULL, adresse VARCHAR (250) NULL, actif VARCHAR(1) NULL, notes VARCHAR (250) NULL, cotisation DECIMAL (9,2) NULL, acquitte VARCHAR(1) NULL, bovin_ids VARCHAR(50) NULL, PRIMARY KEY (id) );",
+            "db_update": [
+            ],
+            "singular": "Eleveur",
+            "plural": "Eleveurs",
+            "elements": {
+                "name": {
+                    "label_column": "Nom",
+                    "label_field": "Nom de l'éleveur",
+                    "type": "text",
+                    "placeholder": "",
+                    "required": true,
+                    "sortable": true,
+                    "editable": true
+                },
+                "cheptel_ref": {
+                    "label_column": "N° Cheptel",
+                    "label_field": "N° Cheptel",
+                    "type": "text"
+                },
+                "adresse": {
+                    "label_column": "Adresse",
+                    "label_field": "Adresse",
+                    "type": "textarea"
+                },
+                "tel": {
+                    "label_column": "Téléphones",
+                    "label_field": "Téléphones",
+                    "type": "text"
+                },
+                "email": {
+                    "label_column": "E-Mail",
+                    "label_field": "E-Mail",
+                    "type": "email"
+                },
+                "actif": {
+                    "label_field": "Actif",
+                    "type": "checkbox",
+                    "default": "0",
+                    "sortable": true
+                },
+                "cotisation": {
+                    "label_column": "Cotisation",
+                    "label_field": "Cotisation",
+                    "type": "decimal",
+                    "pattern": "^\\d+(\\.|\\,)\\d{2}$"
+                },
+                "acquitte": {
+                    "label_column": "Acquittée",
+                    "label_field": "Cotisation acquittée",
+                    "type": "checkbox",
+                    "editable": true
+                },
+                "notes": {
+                    "label_column": "Notes",
+                    "label_field": "Notes",
+                    "type": "textarea"
+                },
+                "bovin_ids": {
+                    "label_column": "Bovins",
+                    "label_field": "Bovins",
+                    "type": "child_key",
+                    "table": "fex_bovins"
+                }
+            },
+            "views": {
+                "vall": {
+                    "title": "Eleveurs",
+                    "form_new": "fedit",
+                    "form_edit": "fedit",
+                    "deletable": true,
+                    "elements": {
+                        "name": {},
+                        "cheptel_ref": {},
+                        "email": {},
+                        "tel": {},
+                        "adresse": {},
+                        "actif": {},
+                        "bovin_ids": {},
+                        "cotisation": {},
+                        "acquitte": {},
+                        "notes": {}
+                    }
+                }
+            },
+            "forms": {
+                "fedit": {
+                    "title": "Fiche Eleveur",
+                    "elements": {
+                        "name": {},
+                        "cheptel_ref": {},
+                        "email": {},
+                        "tel": {},
+                        "adresse": {},
+                        "actif": {},
+                        "bovin_ids": {},
+                        "cotisation": {},
+                        "acquitte": {},
+                        "notes": {}
+                    }
+                }
+            }
+        },
+        "fex_bovin_categories": {
+            "schema": "CREATE TABLE if not exists fex_bovin_categories ( id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR (50) NOT NULL, active VARCHAR (1) NULL, bovin_ids VARCHAR (250) NULL, PRIMARY KEY (id) );",
+            "db_update": [
+            ],
+            "singular": "Catégorie des Bovins",
+            "plural": "Catégories des Bovins",
+            "elements": {
+                "name": {
+                    "label_column": "Catégorie",
+                    "label_field": "Catégorie",
+                    "type": "text",
+                    "required": true,
+                    "sortable": true,
+                    "editable": true
+                },
+                "active": {
+                    "label_column": "Active",
+                    "label_field": "Active",
+                    "type": "checkbox",
+                    "refresh": true,
+                    "editable": true
+                },
+                "bovin_ids": {
+                    "label_column": "Bovins",
+                    "label_field": "Bovins",
+                    "type": "child_key",
+                    "table": "fex_bovins"
+                }
+            },
+            "views": {
+                "vall": {
+                    "title": "Catégories de Bovins",
+                    "form_new": "fedit",
+                    "form_edit": "fedit",
+                    "deletable": true,
+                    "elements": {
+                        "name": {},
+                        "bovin_ids": {},
+                        "active": {}
+                    }
+                }
+            },
+            "forms": {
+                "fedit": {
+                    "title": "Catégorie de Bovins",
+                    "elements": {
+                        "name": {},
+                        "bovin_ids": {},
+                        "active": {}
+                    }
+                }
+            }
+        },
+        "fex_bovin_recompenses": {
+            "schema": "CREATE TABLE if not exists fex_bovin_recompenses ( id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR (50) NOT NULL, active VARCHAR (1) NULL, bovin_ids VARCHAR (250) NULL, PRIMARY KEY (id) );",
+            "db_update": [
+            ],
+            "singular": "Récompense",
+            "plural": "Récompenses",
+            "elements": {
+                "name": {
+                    "label_column": "Récompense",
+                    "label_field": "Récompense",
+                    "type": "text",
+                    "required": true
+                },
+                "active": {
+                    "label_column": "Active",
+                    "label_field": "Active",
+                    "type": "checkbox",
+                    "refresh": true,
+                    "editable": true
+                },
+                "bovin_ids": {
+                    "label_column": "Bovins",
+                    "label_field": "Bovins",
+                    "type": "child_key",
+                    "table": "fex_bovins"
+                }
+            },
+            "views": {
+                "vall": {
+                    "title": "Récompenses",
+                    "form_new": "fedit",
+                    "form_edit": "fedit",
+                    "deletable": true,
+                    "elements": {
+                        "name": {},
+                        "bovin_ids": {},
+                        "active": {}
+                    }
+                }
+            },
+            "forms": {
+                "fedit": {
+                    "title": "Récompense",
+                    "elements": {
+                        "name": {},
+                        "bovin_ids": {},
+                        "active": {}
+                    }
+                }
+            }
+        }
+    }
+}

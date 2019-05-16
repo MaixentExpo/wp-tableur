@@ -1,0 +1,316 @@
+{
+    "application_title": "FoireExpo",
+    "application_description": "Gestion des Membres du Comite des Foires des commissions et du publipostage",
+    "db_version": "19.4.18",
+    "tables": {
+        "fex_contacts": {
+            "schema": "CREATE TABLE if not exists fex_contacts ( id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR (50) NOT NULL, email VARCHAR (50) NULL, tel_portable VARCHAR (20) NULL, tel_autres VARCHAR (50) NULL, role VARCHAR(50) NULL, actif VARCHAR(1) NULL, commission VARCHAR(250) NULL, pilote VARCHAR(250) NULL, notes VARCHAR (250) NULL, PRIMARY KEY (id) );",
+            "db_update": [
+            ],
+            "singular": "Contact",
+            "plural": "Contacts",
+            "elements": {
+                "name": {
+                    "label_column": "Nom",
+                    "label_field": "Nom du contact",
+                    "type": "text",
+                    "placeholder": "Saisir le Nom et prénom",
+                    "required": true,
+                    "sortable": true
+                },
+                "email": {
+                    "label_column": "E-Mail",
+                    "label_field": "E-Mail",
+                    "type": "email",
+                    "required": false
+                },
+                "tel_portable": {
+                    "label_column": "Téléphone",
+                    "label_field": "Teléphone",
+                    "type": "text",
+                    "required": false,
+                    "col_style": "width: 100px;"
+                },
+                "tel_autres": {
+                    "label_column": "Autres Tél.",
+                    "label_field": "Autres téléphones",
+                    "type": "text",
+                    "required": false,
+                    "col_style": "width: 100px;"
+
+                },
+                "role": {
+                    "label_column": "Rôle",
+                    "label_field": "Rôle",
+                    "type": "select",
+                    "items": {
+                        "admin": "Admin",
+                        "editor": "Editeur",
+                        "invite": "Invité"
+                    },
+                    "default": "invite",
+                    "sortable": true,
+                    "col_style": "width: 80px;"
+                },
+                "actif": {
+                    "label_column": "Actif",
+                    "label_field": "Actif",
+                    "type": "checkbox",
+                    "default": "0",
+                    "sortable": true
+                },
+                "commission": {
+                    "label_column": "Commissions",
+                    "label_field": "Commissions",
+                    "type": "category",
+                    "table": "fex_commissions",
+                    "column": "childs"
+                },
+                "pilote": {
+                    "label_column": "Pilote de",
+                    "label_field": "Pilote de",
+                    "type": "category",
+                    "table": "fex_commissions",
+                    "column": "pilote"
+                },
+                "notes": {
+                    "label_column": "Notes",
+                    "label_field": "Notes",
+                    "type": "textarea"
+                }
+            },
+            "views": {
+                "vall": {
+                    "title": "Contacts",
+                    "form_new": "fedit",
+                    "form_edit": "fedit",
+                    "deletable": true,
+                    "elements": {
+                        "name": {},
+                        "email": {},
+                        "tel_portable": {},
+                        "tel_autres": {},
+                        "role": {},
+                        "commission": {},
+                        "pilote": {},
+                        "notes": {}
+                    },
+                    "orderby": "fex_contacts.name",
+                    "filters": {
+                        "Membres du bureau": "id in (select link_id from tbr_categories where name = 'fex_contacts.commission' and cat_id in (select id from fex_commissions where bureau = '1'))"
+                    }
+                }
+            },
+            "forms": {
+                "fedit": {
+                    "title": "Fiche Contact",
+                    "elements": {
+                        "name": {},
+                        "actif": {},
+                        "email": {},
+                        "tel_portable": {},
+                        "tel_autres": {},
+                        "role": {},
+                        "commission": {},
+                        "pilote": {},
+                        "notes": {}
+                    }
+                }
+            }
+        },
+        "fex_commissions": {
+            "schema": "CREATE TABLE if not exists fex_commissions ( id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR (50) NOT NULL, notes VARCHAR (250) NULL, BUREAU VARCHAR(1) NULL, childs VARCHAR(100) NULL, pilote VARCHAR(100) NULL, PRIMARY KEY (id) );",
+            "db_update": [
+            ],
+            "singular": "Commission",
+            "plural": "Commissions",
+            "elements": {
+                "name": {
+                    "label_column": "Nom",
+                    "label_field": "Nom de la Commission",
+                    "type": "text",
+                    "required": true,
+                    "sortable": true,
+                    "col_style": "width: 200px;"
+                },
+                "notes": {
+                    "label_column": "Notes",
+                    "label_field": "Notes",
+                    "type": "textarea",
+                    "col_style": "width: 100px;"
+                },
+                "childs": {
+                    "label_column": "Participants",
+                    "label_field": "Participants",
+                    "type": "child_key",
+                    "table": "fex_contacts"
+                },
+                "pilote": {
+                    "label_column": "Pilote",
+                    "label_field": "Pilote",
+                    "type": "child_key",
+                    "table": "fex_contacts"
+                },
+                "bureau": {
+                    "label_column": "Bureau",
+                    "label_field": "Commission du Bureau",
+                    "type": "checkbox",
+                    "col_style": "width: 100px;"
+                }
+            },
+            "views": {
+                "vall": {
+                    "title": "Commissions",
+                    "form_new": "fedit",
+                    "form_edit": "fedit",
+                    "deletable": true,
+                    "elements": {
+                        "name": {},
+                        "bureau": {},
+                        "childs": {},
+                        "pilote": {},
+                        "notes": {}
+                    }
+                }
+            },
+            "forms": {
+                "fedit": {
+                    "title": "Commission",
+                    "elements": {
+                        "name": {},
+                        "bureau": {},
+                        "childs": {},
+                        "pilote": {},
+                        "notes": {}
+                    }
+                }
+            }
+        },
+        "fex_mails": {
+            "schema": "CREATE TABLE if not exists fex_mails ( id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR (100) NOT NULL, mail_from VARCHAR(100) NULL, reply VARCHAR(100) NULL, date_sended VARCHAR(50) NULL, dest VARCHAR(2000) NULL, copy VARCHAR(250) NULL, cci VARCHAR(2000) NULL, body VARCHAR(5000) NULL, histo VARCHAR(5000) NULL, note VARCHAR(2000) NULL, PRIMARY KEY (id) );",
+            "db_update": [
+                "ALTER TABLE fex_mails CHANGE body body VARCHAR(5000)"
+            ],
+            "singular": "Mail",
+            "plural": "Mails",
+            "elements": {
+                "name": {
+                    "label_column": "Objet",
+                    "label_field": "Objet du mail",
+                    "type": "text",
+                    "size": "50",
+                    "required": true,
+                    "sortable": true
+                },
+                "date_sended": {
+                    "label_column": "Envoyé le",
+                    "label_field": "Envoyé le",
+                    "type": "text",
+                    "col_style": "width: 100px",
+                    "protected": true
+                },
+                "mail_from": {
+                    "label_column": "Emetteur",
+                    "label_field": "Emetteur",
+                    "col_style": "width: 100px",
+                    "required": true,
+                    "size": "50",
+                    "type": "text"
+                },
+                "reply": {
+                    "label_column": "Répondre à",
+                    "label_field": "Répondre à",
+                    "required": true,
+                    "size": "50",
+                    "type": "text"
+                },
+                "dest": {
+                    "label_column": "Destinataires",
+                    "label_field": "Destinataires",
+                    "type": "note"
+                },
+                "copy": {
+                    "label_column": "En copie",
+                    "label_field": "En copie",
+                    "type": "textarea"
+                },
+                "cci": {
+                    "label_column": "Mailing à",
+                    "label_field": "ou Mailing à",
+                    "type": "note"
+                },
+                "body": {
+                    "label_column": "Message",
+                    "label_field": "Le message",
+                    "type": "html"
+                },
+                "_mail_confirm": {
+                    "label_column": "Confirmation",
+                    "label_field": "Cocher cette case pour confirmer l'envoi du message",
+                    "type": "checkbox"
+                },
+                "_mail": {
+                    "label_column": "Envoyer",
+                    "label_field": "Envoyer le message",
+                    "type": "mail",
+                    "options": {
+                        "from": "{mail_from}",
+                        "reply": "{reply}",
+                        "to": "{dest}",
+                        "copy": "{copy}",
+                        "cci": "{cci}",
+                        "subject": "{name}",
+                        "body": "{body}",
+                        "confirm": "{_mail_confirm}",
+                        "date": "date_sended",
+                        "histo": "histo"
+                    }
+                },
+                "note": {
+                    "label_column": "Commentaires",
+                    "label_field": "Commentaires",
+                    "type": "note"
+                },
+                "histo": {
+                    "label_column": "Historique",
+                    "label_field": "Historique des envois",
+                    "type": "note"
+                }
+            },
+            "views": {
+                "vall": {
+                    "title": "Mails",
+                    "form_new": "fmail",
+                    "form_edit": "fmail",
+                    "deletable": true,
+                    "elements": {
+                        "name": {},
+                        "mail_from": {},
+                        "reply": {},
+                        "dest": {},
+                        "copy": {},
+                        "cci": {}
+                    }
+                }
+            },
+            "forms": {
+                "fmail": {
+                    "title": "Mails",
+                    "elements": {
+                        "mail_from": {},
+                        "reply": {},
+                        "dest": {},
+                        "cci": {},
+                        "copy": {},
+                        "name": {},
+                        "body": {},
+                        "histo": {},
+                        "note": {},
+                        "_mail": {},
+                        "_mail_confirm": {}
+                    }
+                }
+            }
+        }
+    }
+}
